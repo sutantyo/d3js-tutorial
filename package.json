@@ -1,0 +1,19 @@
+{
+  "name": "d3js-tutorial",
+  "version": "0.1.0",
+  "description": "Collection of D3.js tutorial",
+  "main": "index.html",
+  "homepage": "https://sutantyo.github.io/d3js-tutorial",
+  "scripts": {
+    "deploy": "gh-pages -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sutantyo/d3js-tutorial"
+  },
+  "author": "Daniel Sutantyo",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
