@@ -5,7 +5,7 @@
   "main": "index.html",
   "homepage": "https://sutantyo.github.io/d3js-tutorial",
   "scripts": {
-    "deploy": "gh-pages -d public"
+    "deploy": "gh-pages -d public/_site"
   },
   "repository": {
     "type": "git",
