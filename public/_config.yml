@@ -46,3 +46,15 @@ plugins:
 # Enable Just the Docts search functionality
 search_enabled: true
 
+just_the_docs:
+  custom_head: >
+    <link rel="stylesheet" href="/assets/css/tokyo-night-dark.min.css"/>
+    <script src="/assets/js/highlight.min.js"/>
+    <script>
+      console.log("Loading")
+      document.addEventListener('DOMContentLoaded', (event) => {
+          document.querySelectorAll('pre code').forEach((block) => {
+              hljs.highlightBlock(block);
+          });
+      });
+    </script>
