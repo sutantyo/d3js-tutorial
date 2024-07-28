@@ -16,23 +16,11 @@ Main reference:
 To select 
 
 ```javascript
-      let node = d3.select('#example').append('ul')
-      for (let i = 0; i < 12; i++){
-        node.append('li')
-          .html('the quick brown fox jumps over the lazy dog')
-          .style('font-size',16+i+'px')
-          .style('color',d3.rgb(100+8*i,30+16*i,40+20*i))
-          .attr('class','colourful-li')
-      }
-      d3.selectAll('li.colourful-li')
-          .style('font-family','Helvetica')
+{% include js/01/select-01.js %}
 ```
 
 <button type="button" class="btn" id="ex1" onclick="select()">Click me</button>
 
 <script>
-  function select(){
-    console.log('select clicked');
-    d3.select('#ex1').style('color',d3.color('red'))
-  }
+{% include js/01/select-01.js %}
 </script>
