@@ -6,32 +6,95 @@
     
     "relUrl": "/about/"
   },"1": {
+    "doc": "DOM Manipulation",
+    "title": "DOM Manipulation",
+    "content": " ",
+    "url": "/docs/tutorial-basic/basic-01-dom-manipulation.html",
+    
+    "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html"
+  },"2": {
+    "doc": "DOM Manipulation",
+    "title": "Selection",
+    "content": "Main reference: . | https://d3js.org/d3-selection | . To select . var color = 'red'; function select(){ console.log('select clicked'); if (color == 'red') color = 'blue'; else color = 'red'; d3.select('#ex1').style('color',d3.color(color)) } . Click me . ",
+    "url": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection",
+    
+    "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection"
+  },"3": {
+    "doc": "Basic Shapes",
+    "title": "Basic Shapes",
+    "content": "&lt;script&gt; var svg = d3.select(\"#rect\").append(\"svg\").attr(\"width\", 800).attr(\"height\", 200); svg.append('rect') .attr('x', 10) .attr('y', 120) .attr('width', 600) .attr('height', 40) .attr('stroke', 'black') .attr('fill', '#69a3b2'); &lt;/script&gt; . ",
+    "url": "/docs/tutorial-basic/basic-02-basic-shapes.html",
+    
+    "relUrl": "/docs/tutorial-basic/basic-02-basic-shapes.html"
+  },"4": {
     "doc": "Getting Started",
     "title": "Getting Started",
     "content": "Welcome . ",
     "url": "/docs/getting-started.html",
     
     "relUrl": "/docs/getting-started.html"
-  },"2": {
+  },"5": {
     "doc": "Getting Started",
     "title": "Installation",
     "content": " ",
     "url": "/docs/getting-started.html#installation",
     
     "relUrl": "/docs/getting-started.html#installation"
-  },"3": {
+  },"6": {
+    "doc": "Intermediate Tutorial",
+    "title": "Intermediate Tutorial",
+    "content": " ",
+    "url": "/docs/tutorial-intermediate/",
+    
+    "relUrl": "/docs/tutorial-intermediate/"
+  },"7": {
+    "doc": "Basic Tutorial",
+    "title": "Basic Tutorial",
+    "content": " ",
+    "url": "/docs/tutorial-basic/",
+    
+    "relUrl": "/docs/tutorial-basic/"
+  },"8": {
     "doc": "Home",
     "title": "Welcome to Documentation",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum . ",
     "url": "/#welcome-to-documentation",
     
     "relUrl": "/#welcome-to-documentation"
-  },"4": {
+  },"9": {
     "doc": "Home",
     "title": "Home",
     "content": " ",
     "url": "/",
     
     "relUrl": "/"
+  },"10": {
+    "doc": "Intermediate-1",
+    "title": "Intermediate 1",
+    "content": " ",
+    "url": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1",
+    
+    "relUrl": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1"
+  },"11": {
+    "doc": "Intermediate-1",
+    "title": "Intermediate-1",
+    "content": " ",
+    "url": "/docs/tutorial-intermediate/intermediate-1.html",
+    
+    "relUrl": "/docs/tutorial-intermediate/intermediate-1.html"
+  },"12": {
+    "doc": "Intermediate-2",
+    "title": "Intermediate 2",
+    "content": " ",
+    "url": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2",
+    
+    "relUrl": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2"
+  },"13": {
+    "doc": "Intermediate-2",
+    "title": "Intermediate-2",
+    "content": " ",
+    "url": "/docs/tutorial-intermediate/intermediate-2.html",
+    
+    "relUrl": "/docs/tutorial-intermediate/intermediate-2.html"
   }
 }
