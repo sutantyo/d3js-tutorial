@@ -50,6 +50,7 @@ just_the_docs:
   custom_head: >
     <link rel="stylesheet" href="/assets/css/tokyo-night-dark.min.css"/>
     <script src="/assets/js/highlight.min.js"/>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
       console.log("Loading")
       document.addEventListener('DOMContentLoaded', (event) => {

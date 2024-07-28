@@ -8,7 +8,6 @@ nav_order: 1
 # DOM Manipulation
 
 
-
 ## Selection
 
 Main reference: 
@@ -28,3 +27,12 @@ To select
       d3.selectAll('li.colourful-li')
           .style('font-family','Helvetica')
 ```
+
+<button type="button" class="btn" id="ex1" onclick="select()">Click me</button>
+
+<script>
+  function select(){
+    console.log('select clicked');
+    d3.select('#ex1').style('color',d3.color('red'))
+  }
+</script>
