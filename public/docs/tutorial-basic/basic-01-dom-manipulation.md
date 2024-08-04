@@ -18,5 +18,5 @@ To select
 ```javascript
 ```
 
-<script src="{% link assets/js/01/select-01.js %}"></script>
+<script src="{{ '/assets/js/01/select-01.js' | relative_url }}"></script>
 <button type="button" class="btn" id="ex1" onclick="select()">Click me</button>
