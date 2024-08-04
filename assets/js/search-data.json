@@ -2,98 +2,98 @@
     "doc": "About",
     "title": "About",
     "content": "This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at jekyllrb.com . You can find the source code for Minima at GitHub: jekyll / minima . You can find the source code for Jekyll at GitHub: jekyll / jekyll . ",
-    "url": "/about/",
+    "url": "/d3js-tutorial/about/",
     
     "relUrl": "/about/"
   },"1": {
     "doc": "DOM Manipulation",
     "title": "DOM Manipulation",
     "content": " ",
-    "url": "/docs/tutorial-basic/basic-01-dom-manipulation.html",
+    "url": "/d3js-tutorial/docs/tutorial-basic/basic-01-dom-manipulation.html",
     
     "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html"
   },"2": {
     "doc": "DOM Manipulation",
     "title": "Selection",
     "content": "Main reference: . | https://d3js.org/d3-selection | . To select . Click me . ",
-    "url": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection",
+    "url": "/d3js-tutorial/docs/tutorial-basic/basic-01-dom-manipulation.html#selection",
     
     "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection"
   },"3": {
     "doc": "Basic Shapes",
     "title": "Basic Shapes",
     "content": ". ",
-    "url": "/docs/tutorial-basic/basic-02-basic-shapes.html",
+    "url": "/d3js-tutorial/docs/tutorial-basic/basic-02-basic-shapes.html",
     
     "relUrl": "/docs/tutorial-basic/basic-02-basic-shapes.html"
   },"4": {
     "doc": "Getting Started",
     "title": "Getting Started",
     "content": "Welcome . ",
-    "url": "/docs/getting-started.html",
+    "url": "/d3js-tutorial/docs/getting-started.html",
     
     "relUrl": "/docs/getting-started.html"
   },"5": {
     "doc": "Getting Started",
     "title": "Installation",
     "content": " ",
-    "url": "/docs/getting-started.html#installation",
+    "url": "/d3js-tutorial/docs/getting-started.html#installation",
     
     "relUrl": "/docs/getting-started.html#installation"
   },"6": {
     "doc": "Intermediate Tutorial",
     "title": "Intermediate Tutorial",
     "content": " ",
-    "url": "/docs/tutorial-intermediate/",
+    "url": "/d3js-tutorial/docs/tutorial-intermediate/",
     
     "relUrl": "/docs/tutorial-intermediate/"
   },"7": {
     "doc": "Basic Tutorial",
     "title": "Basic Tutorial",
     "content": " ",
-    "url": "/docs/tutorial-basic/",
+    "url": "/d3js-tutorial/docs/tutorial-basic/",
     
     "relUrl": "/docs/tutorial-basic/"
   },"8": {
     "doc": "Home",
     "title": "Welcome to Documentation",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum . ",
-    "url": "/#welcome-to-documentation",
+    "url": "/d3js-tutorial/#welcome-to-documentation",
     
     "relUrl": "/#welcome-to-documentation"
   },"9": {
     "doc": "Home",
     "title": "Home",
     "content": " ",
-    "url": "/",
+    "url": "/d3js-tutorial/",
     
     "relUrl": "/"
   },"10": {
     "doc": "Intermediate-1",
     "title": "Intermediate 1",
     "content": " ",
-    "url": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1",
+    "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html#intermediate-1",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1"
   },"11": {
     "doc": "Intermediate-1",
     "title": "Intermediate-1",
     "content": " ",
-    "url": "/docs/tutorial-intermediate/intermediate-1.html",
+    "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html"
   },"12": {
     "doc": "Intermediate-2",
     "title": "Intermediate 2",
     "content": " ",
-    "url": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2",
+    "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-2.html#intermediate-2",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2"
   },"13": {
     "doc": "Intermediate-2",
     "title": "Intermediate-2",
     "content": " ",
-    "url": "/docs/tutorial-intermediate/intermediate-2.html",
+    "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-2.html",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-2.html"
   }
