@@ -15,7 +15,7 @@
   },"2": {
     "doc": "DOM Manipulation",
     "title": "Selection",
-    "content": "Main reference: . | https://d3js.org/d3-selection | . To select . Click me . ",
+    "content": "Main reference: . | https://d3js.org/d3-selection | . To select . var color = 'red'; function select(){ console.log('select clicked'); if (color == 'red') color = 'blue'; else color = 'red'; d3.select('#ex1').style('color',d3.color(color)) } . Click me . ",
     "url": "/d3js-tutorial/docs/tutorial-basic/basic-01-dom-manipulation.html#selection",
     
     "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection"
