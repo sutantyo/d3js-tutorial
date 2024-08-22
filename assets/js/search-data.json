@@ -1,59 +1,59 @@
 {"0": {
     "doc": "About",
+    "title": "Javascript embedding",
+    "content": "In most pages, a javascript code is both shown and run on a page, with only one source. The source file is stored inside the assets/js directory (in the appropriate subdirectories). It is run using the &lt;script&gt; tag like so: . &lt;script src=\"/d3js-tutorial/assets/js/path/to/file.js\"&gt;&lt;/script&gt; . To display the code on the html, a ruby script _plugins/load_file_tag.rb was added (written by ChatGPT) . module Jekyll class LoadFileTag &lt; Liquid::Tag def initialize(tag_name, file, tokens) super @file = file.strip end def render(context) site = context.registers[:site] file_path = File.join(site.source, @file) if File.exist?(file_path) File.read(file_path) else \"File not found: #{@file}\" end end end end Liquid::Template.register_tag('loadfile', Jekyll::LoadFileTag) . The code can then be displayed by calling this plugin: . ```javascript {% loadfile assets/js/path/to/file.js %} ``` . ",
+    "url": "/d3js-tutorial/about/#javascript-embedding",
+    
+    "relUrl": "/about/#javascript-embedding"
+  },"1": {
+    "doc": "About",
     "title": "About",
     "content": "This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at jekyllrb.com . You can find the source code for Minima at GitHub: jekyll / minima . You can find the source code for Jekyll at GitHub: jekyll / jekyll . ",
     "url": "/d3js-tutorial/about/",
     
     "relUrl": "/about/"
-  },"1": {
+  },"2": {
     "doc": "DOM Manipulation",
     "title": "DOM Manipulation",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-basic/basic-01-dom-manipulation.html",
     
     "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html"
-  },"2": {
+  },"3": {
     "doc": "DOM Manipulation",
     "title": "Selection",
     "content": "Main reference: . | https://d3js.org/d3-selection | . To select . var color = 'red'; function select(){ console.log('select clicked'); if (color == 'red') color = 'blue'; else color = 'red'; d3.select('#ex1').style('color',d3.color(color)) } . Click me . ",
     "url": "/d3js-tutorial/docs/tutorial-basic/basic-01-dom-manipulation.html#selection",
     
     "relUrl": "/docs/tutorial-basic/basic-01-dom-manipulation.html#selection"
-  },"3": {
+  },"4": {
     "doc": "Basic Shapes",
     "title": "Basic Shapes",
-    "content": ". ",
+    "content": "The simple way to add shapes using D3.js is by adding an svg component, which is native to html. The svg component is the container for SVG graphics, and we start by adding this component to the html, setting its height and width as you can see in the example below. We can then append a rectangle to this SVG, but since the rectangle is larger than the containing SVG element, and also since we moved it rightward and downward (x and y), only parts of it are shown. So we need to make sure that the SVG container is larger than whatever shape we want it to hold. var svg = d3.select(\"#basic-shapes-01\").append(\"svg\").attr(\"width\", 200).attr(\"height\", 200) svg.append('rect') .attr('x', 5) // horizontal (from left) coordinate .attr('y', 20) // vertical (from top) coordinate .attr('rx', 20) // rounded corners .attr('ry', 20) .attr('width', 300) .attr('height',200) .attr('stroke', d3.color('thistle')) // border colour .attr('stroke-width', 2) // border thickness .attr('fill', d3.color('lavender')) . To add multiple shapes we can use a for loop: . var svg = d3.select(\"#basic-shapes-02\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 300) var height = 50; var width = 50; var gap = 20; for(var i = 0; i &lt; 5; i++) { svg.append('rect') .attr('x', i*width + gap) .attr('y', i*height + gap) .attr('height',height) .attr('width',width) .attr('stroke', d3.color('thistle')) .attr('stroke-width', 1) .attr('fill', d3.color('lavender')) } . However, in the spirit of data-driven design, D3.js has the ability to draw multiple shapes based on an array: . var svg = d3.select(\"#basic-shapes-03\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 300) var data = [ {x: 5, y: 18}, {x: 25, y: 83}, {x: 45, y: 43}, {x: 65, y: 90}, {x: 85, y: 110} ] svg.selectAll('rect') .data(data) .enter() .append('rect') .attr('y', d =&gt; d.y) // use y property of each object in the array .attr('x', (d,i) =&gt; (80 * i) + 10) // i is the index of the object in the array .attr('rx', 2) .attr('ry', 2) .attr('width', 40) .attr('height',40) .attr('fill', d3.color('lavender')) . The most important thing to consider in the above code is that when we bind data to a D3 element, we can then pass an anonymous function with parameter (d,i) where d is the element and i is its index. There is one more parameter, nodes that refers to the whole dataset. In the example below, we use d3.select(nodes[i-1]).attr('cy') to get the previous circle’s cy attribute. var height = 200; var width = 600; var svg = d3.select(\"#basic-shapes-04\").append(\"svg\").attr(\"width\", 600).attr(\"height\", height) var data = [ 80, 87, 95, 95, 95, 83, 65, 64, 63, 63, 63, 81, 74 ] var gap = width / (data.length+1) svg.selectAll('circle') .data(data) .enter() .append('circle') .attr('cx', (d,i) =&gt; gap + i * gap) // x-coordinate .attr('cy', (d) =&gt; height - d) // y-coordinate .attr('r', 14) // radius .attr('fill', (d,i,nodes) =&gt; { if (i &gt; 0) return (d3.select(nodes[i]).attr('cy') == d3.select(nodes[i-1]).attr('cy')) ? d3.color('thistle') : d3.color('lavender') return d3.color('lavender') }) . We cannot directly use cy from nodes[i-1] since it is no longer an int (it is a DOM element), hence why we need to use d3.select(). Another, possibly simpler method, is to use the data that was used to construct the node (from the data array), using . d3.select(nodes[i-1]).datum() . ",
     "url": "/d3js-tutorial/docs/tutorial-basic/basic-02-basic-shapes.html",
     
     "relUrl": "/docs/tutorial-basic/basic-02-basic-shapes.html"
-  },"4": {
+  },"5": {
     "doc": "Getting Started",
     "title": "Getting Started",
     "content": "Welcome . ",
     "url": "/d3js-tutorial/docs/getting-started.html",
     
     "relUrl": "/docs/getting-started.html"
-  },"5": {
+  },"6": {
     "doc": "Getting Started",
     "title": "Installation",
     "content": " ",
     "url": "/d3js-tutorial/docs/getting-started.html#installation",
     
     "relUrl": "/docs/getting-started.html#installation"
-  },"6": {
+  },"7": {
     "doc": "Intermediate Tutorial",
     "title": "Intermediate Tutorial",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/",
     
     "relUrl": "/docs/tutorial-intermediate/"
-  },"7": {
-    "doc": "Basic Tutorial",
-    "title": "Basic Tutorial",
-    "content": " ",
-    "url": "/d3js-tutorial/docs/tutorial-basic/",
-    
-    "relUrl": "/docs/tutorial-basic/"
   },"8": {
     "doc": "Home",
     "title": "Welcome to Documentation",
@@ -69,27 +69,34 @@
     
     "relUrl": "/"
   },"10": {
+    "doc": "Basic Tutorial",
+    "title": "Basic Tutorial",
+    "content": " ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/",
+    
+    "relUrl": "/docs/tutorial-basic/"
+  },"11": {
     "doc": "Intermediate-1",
     "title": "Intermediate 1",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html#intermediate-1",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1"
-  },"11": {
+  },"12": {
     "doc": "Intermediate-1",
     "title": "Intermediate-1",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html"
-  },"12": {
+  },"13": {
     "doc": "Intermediate-2",
     "title": "Intermediate 2",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-2.html#intermediate-2",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2"
-  },"13": {
+  },"14": {
     "doc": "Intermediate-2",
     "title": "Intermediate-2",
     "content": " ",
