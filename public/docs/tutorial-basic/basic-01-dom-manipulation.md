@@ -16,7 +16,7 @@ Main reference:
 To select 
 
 ```javascript
-{% rawfile assets/js/01/select-01.js %}
+{% loadfile assets/js/01/select-01.js %}
 ```
 
 <script src="{{ '/assets/js/01/select-01.js' | relative_url }}"></script>

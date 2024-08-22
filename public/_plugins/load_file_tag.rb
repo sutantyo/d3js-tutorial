@@ -1,5 +1,5 @@
 module Jekyll
-  class RawFileTag < Liquid::Tag
+  class LoadFileTag < Liquid::Tag
     def initialize(tag_name, file, tokens)
       super
       @file = file.strip
@@ -17,4 +17,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('rawfile', Jekyll::RawFileTag)
+Liquid::Template.register_tag('loadfile', Jekyll::LoadFileTag)
