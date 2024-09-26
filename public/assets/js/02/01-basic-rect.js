@@ -2,8 +2,8 @@
   svg.append('rect')
     .attr('x', 5)       // horizontal (from left) coordinate
     .attr('y', 20)      // vertical (from top) coordinate
-    .attr('rx', 20)     // rounded corners
-    .attr('ry', 20) 
+    .attr('rx', 20)     // setting for rounded corners
+    .attr('ry', 20)     // setting for rounded corners
     .attr('width', 300)
     .attr('height',200)
     .attr('stroke', d3.color('thistle')) // border colour
