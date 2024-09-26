@@ -1,7 +1,7 @@
 {"0": {
     "doc": "About",
     "title": "Javascript embedding",
-    "content": "In most pages, a javascript code is both shown and run on a page, with only one source. The source file is stored inside the assets/js directory (in the appropriate subdirectories). It is run using the &lt;script&gt; tag like so: . &lt;script src=\"/d3js-tutorial/assets/js/path/to/file.js\"&gt;&lt;/script&gt; . To display the code on the html, a ruby script _plugins/load_file_tag.rb was added (written by ChatGPT) . module Jekyll class LoadFileTag &lt; Liquid::Tag def initialize(tag_name, file, tokens) super @file = file.strip end def render(context) site = context.registers[:site] file_path = File.join(site.source, @file) if File.exist?(file_path) File.read(file_path) else \"File not found: #{@file}\" end end end end Liquid::Template.register_tag('loadfile', Jekyll::LoadFileTag) . The code can then be displayed by calling this plugin: . ```javascript {% loadfile assets/js/path/to/file.js %} ``` . ",
+    "content": "In most pages, a javascript code is both shown and run on a page, with only one source. The source file is stored inside the assets/js directory (in the appropriate subdirectories). The code is run using the &lt;script&gt; tag like so: . &lt;script src=\"{{ '/assets/js/path/to/file.js' | relative_url }}\"&gt;&lt;/script&gt; . The relative_url is necessary because in deployment the assets folder is going to be copied over to _site. To display the code on the html, a ruby script _plugins/load_file_tag.rb was added (written by ChatGPT) . module Jekyll class LoadFileTag &lt; Liquid::Tag def initialize(tag_name, file, tokens) super @file = file.strip end def render(context) site = context.registers[:site] file_path = File.join(site.source, @file) if File.exist?(file_path) File.read(file_path) else \"File not found: #{@file}\" end end end end Liquid::Template.register_tag('loadfile', Jekyll::LoadFileTag) . The code can then be displayed by calling this plugin: . ```javascript {% loadfile assets/js/path/to/file.js %} ``` . ",
     "url": "/d3js-tutorial/about/#javascript-embedding",
     
     "relUrl": "/about/#javascript-embedding"
@@ -29,45 +29,45 @@
   },"4": {
     "doc": "Basic Shapes",
     "title": "Basic Shapes",
-    "content": "The simple way to add shapes using D3.js is by adding an svg component, which is native to html. The svg component is the container for SVG graphics, and we start by adding this component to the html, setting its height and width as you can see in the example below. We can then append a rectangle to this SVG, but since the rectangle is larger than the containing SVG element, and also since we moved it rightward and downward (x and y), only parts of it are shown. So we need to make sure that the SVG container is larger than whatever shape we want it to hold. var svg = d3.select(\"#basic-shapes-01\").append(\"svg\").attr(\"width\", 200).attr(\"height\", 200) svg.append('rect') .attr('x', 5) // horizontal (from left) coordinate .attr('y', 20) // vertical (from top) coordinate .attr('rx', 20) // rounded corners .attr('ry', 20) .attr('width', 300) .attr('height',200) .attr('stroke', d3.color('thistle')) // border colour .attr('stroke-width', 2) // border thickness .attr('fill', d3.color('lavender')) . To add multiple shapes we can use a for loop: . var svg = d3.select(\"#basic-shapes-02\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 300) var height = 50; var width = 50; var gap = 20; for(var i = 0; i &lt; 5; i++) { svg.append('rect') .attr('x', i*width + gap) .attr('y', i*height + gap) .attr('height',height) .attr('width',width) .attr('stroke', d3.color('thistle')) .attr('stroke-width', 1) .attr('fill', d3.color('lavender')) } . However, in the spirit of data-driven design, D3.js has the ability to draw multiple shapes based on an array: . var svg = d3.select(\"#basic-shapes-03\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 300) var data = [ {x: 5, y: 18}, {x: 25, y: 83}, {x: 45, y: 43}, {x: 65, y: 90}, {x: 85, y: 110} ] svg.selectAll('rect') .data(data) .enter() .append('rect') .attr('y', d =&gt; d.y) // use y property of each object in the array .attr('x', (d,i) =&gt; (80 * i) + 10) // i is the index of the object in the array .attr('rx', 2) .attr('ry', 2) .attr('width', 40) .attr('height',40) .attr('fill', d3.color('lavender')) . The most important thing to consider in the above code is that when we bind data to a D3 element, we can then pass an anonymous function with parameter (d,i) where d is the element and i is its index. There is one more parameter, nodes that refers to the whole dataset. In the example below, we use d3.select(nodes[i-1]).attr('cy') to get the previous circle’s cy attribute. var height = 200; var width = 600; var svg = d3.select(\"#basic-shapes-04\").append(\"svg\").attr(\"width\", 600).attr(\"height\", height) var data = [ 80, 87, 95, 95, 95, 83, 65, 64, 63, 63, 63, 81, 74 ] var gap = width / (data.length+1) svg.selectAll('circle') .data(data) .enter() .append('circle') .attr('cx', (d,i) =&gt; gap + i * gap) // x-coordinate .attr('cy', (d) =&gt; height - d) // y-coordinate .attr('r', 14) // radius .attr('fill', (d,i,nodes) =&gt; { if (i &gt; 0) return (d3.select(nodes[i]).attr('cy') == d3.select(nodes[i-1]).attr('cy')) ? d3.color('thistle') : d3.color('lavender') return d3.color('lavender') }) . We cannot directly use cy from nodes[i-1] since it is no longer an int (it is a DOM element), hence why we need to use d3.select(). Another, possibly simpler method, is to use the data that was used to construct the node (from the data array), using . d3.select(nodes[i-1]).datum() . ",
+    "content": "The usual method for adding shapes in D3.js is by first adding an svg component, which is a native html container for SVG graphics, and then add SVG shapes to it. In the first example below, we start by adding the SVG element of size 200 by 200 pixels. We then append a rectangle with a larger dimension of 300 by 200 pixes to the container, and also move the x and y coordinates a little (the coordinate where the shape is located). We can see how only part of the rectangle is shown. In general, we should make sure that the SVG container is large enough to display the elements contained within it. var svg = d3.select(\"#basic-shapes-01\").append(\"svg\").attr(\"width\", 200).attr(\"height\", 200) svg.append('rect') .attr('x', 5) // horizontal (from left) coordinate .attr('y', 20) // vertical (from top) coordinate .attr('rx', 20) // setting for rounded corners .attr('ry', 20) // setting for rounded corners .attr('width', 300) .attr('height',200) .attr('stroke', d3.color('thistle')) // border colour .attr('stroke-width', 2) // border thickness .attr('fill', d3.color('lavender')) . In the above example, we call attr() once for each attribute we want to set. We can also call attr() once and passing it an object with key-value pairs, but the style with multiple attr() calls seem to be more common, and I find it easier to edit. To add multiple shapes we can use a for loop to call append multiple times. var svg = d3.select(\"#basic-shapes-02\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 300) var height = 50; var width = 50; for(var i = 0; i &lt; 5; i++) { svg.append('rect') .attr('x', i*width) .attr('y', i*height) .attr('height',height) .attr('width',width) .attr('stroke', d3.color('thistle')) .attr('stroke-width', 1) .attr('fill', d3.color('lavender')) } . However, in the spirit of data-driven design, D3.js has the ability to extract values from an array to use as the shape parameters, as we can see below: . var svg = d3.select(\"#basic-shapes-03\").append(\"svg\").attr(\"width\", 600).attr(\"height\", 150) var arr = [ {x: 5, y: 18}, {x: 25, y: 83}, {x: 45, y: 43}, {x: 65, y: 90}, {x: 85, y: 110}, {x:105, y: 73}, {x:125, y: 23} ] svg.selectAll('rect') .data(arr) .enter() .append('rect') .attr('y', d =&gt; d.y) // use y property of each object in the array .attr('x', (d,i) =&gt; (80 * i) + 10) // i is the index of the object in the array .attr('rx', 2) .attr('ry', 2) .attr('width', 40) .attr('height',40) .attr('fill', d3.color('lavender')) . Here we use selectAll('rect') to tell D3.js to select all rectangles, even though at this point there are no rectangles. Hopefully it will make more sense later on. The next two lines are the important bits that make this work: . | .data() binds the selection (of all rectangles) to the array. | .enter() creates a virtual rectangle for each element in the array, which probably does not make much sense now either. | . Once the data is bound to the selection, and enough rectangles are created, the append() function will create the actual rectangles as in the previous examples, except this time with access to some data to set the attributes. The significance of enter() (vs exit()) will be made clear in later sections, but for now we can treat it as something that has to be done before we call append(). To use the values in the array, we pass an anonymous function with parameter (d,i) where d is the array element and i is its index. In the above example, we set the y-coordinate to be the y value of each object in the array, where as the x depends on the index of the element. There is one more optional parameter nodes that refers to the DOM elements that are created, in this example, an array of SVG rectangles. In the next code below, we use d3.select(nodes[i-1]).attr('cy') to get the previous circle’s cy attribute to check if the value is the same with the current node — darker circles mean it has the same value as the previous circle. var height = 200; var width = 600; var svg = d3.select(\"#basic-shapes-04\").append(\"svg\").attr(\"width\", 600).attr(\"height\", height) var data = [ 80, 87, 95, 95, 95, 83, 65, 64, 63, 63, 63, 81, 74 ] var gap = width / (data.length+1) svg.selectAll('circle') .data(data) .enter() .append('circle') .attr('cx', (d,i) =&gt; gap + i * gap) // x-coordinate .attr('cy', (d) =&gt; height - d) // y-coordinate .attr('r', 14) // radius .attr('fill', (d,i,nodes) =&gt; { if (i &gt; 0) return (d3.select(nodes[i]).attr('cy') == d3.select(nodes[i-1]).attr('cy')) ? d3.color('thistle') : d3.color('lavender') return d3.color('lavender') }) . We have to use select() because we are selecting a DOM element, and also we cannot directly use cy from nodes[i-1] for the same reason. Another, possibly simpler method, is to use the values from the data array using the datum() function like so: . d3.select(nodes[i-1]).datum() . In the following code, we use datum() to use darker colour if a circle has value &lt; 75. svg = d3.select(\"#basic-shapes-05\").append(\"svg\").attr(\"width\", width).attr(\"height\", height) data = [ 80, 87, 95, 95, 95, 83, 65, 64, 63, 63, 63, 81, 74 ] svg.selectAll('circle') .data(data) .enter() .append('circle') .attr('cx', (d,i) =&gt; gap + i * gap) .attr('cy', (d) =&gt; height - d) .attr('r', 14) .attr('fill', (d,i,nodes) =&gt; { return (d3.select(nodes[i]).datum() &gt; 75) ? d3.color('lavender') : d3.color('thistle'); }) . Now to explain why we use selectAll() even when there were no shapes, and also the significance of enter() and exit(). When we bind data to a selection in D3.js, this is not a one-off process, in a sense that D3.js can detect changes to underlying data and update the SVG accordingly. Click me . Click me . ",
     "url": "/d3js-tutorial/docs/tutorial-basic/basic-02-basic-shapes.html",
     
     "relUrl": "/docs/tutorial-basic/basic-02-basic-shapes.html"
   },"5": {
+    "doc": "Data",
+    "title": "Data",
+    "content": " ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/basic-03-data.html",
+    
+    "relUrl": "/docs/tutorial-basic/basic-03-data.html"
+  },"6": {
+    "doc": "Data",
+    "title": "Loading a JSON file",
+    "content": "var filepath = d3.select('#data-01').attr('data-json-url') d3.json(filepath) .then((data) =&gt; { var rows = d3.select('#data-01') .append('table') .append('tbody') .selectAll('tr') .data(data.results.slice(0,9)) .enter() .append('tr') rows.append('td') .html((d, i) =&gt; `&lt;a href='${d.url}'&gt;${d.name}&lt;/a&gt;`) } ) . Click me . ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/basic-03-data.html#loading-a-json-file",
+    
+    "relUrl": "/docs/tutorial-basic/basic-03-data.html#loading-a-json-file"
+  },"7": {
     "doc": "Getting Started",
     "title": "Getting Started",
     "content": "Welcome . ",
     "url": "/d3js-tutorial/docs/getting-started.html",
     
     "relUrl": "/docs/getting-started.html"
-  },"6": {
+  },"8": {
     "doc": "Getting Started",
     "title": "Installation",
     "content": " ",
     "url": "/d3js-tutorial/docs/getting-started.html#installation",
     
     "relUrl": "/docs/getting-started.html#installation"
-  },"7": {
+  },"9": {
     "doc": "Intermediate Tutorial",
     "title": "Intermediate Tutorial",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/",
     
     "relUrl": "/docs/tutorial-intermediate/"
-  },"8": {
-    "doc": "Home",
-    "title": "Welcome to Documentation",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum . ",
-    "url": "/d3js-tutorial/#welcome-to-documentation",
-    
-    "relUrl": "/#welcome-to-documentation"
-  },"9": {
-    "doc": "Home",
-    "title": "Home",
-    "content": " ",
-    "url": "/d3js-tutorial/",
-    
-    "relUrl": "/"
   },"10": {
     "doc": "Basic Tutorial",
     "title": "Basic Tutorial",
@@ -76,32 +76,67 @@
     
     "relUrl": "/docs/tutorial-basic/"
   },"11": {
+    "doc": "Home",
+    "title": "Welcome to Documentation",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum . ",
+    "url": "/d3js-tutorial/#welcome-to-documentation",
+    
+    "relUrl": "/#welcome-to-documentation"
+  },"12": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/d3js-tutorial/",
+    
+    "relUrl": "/"
+  },"13": {
     "doc": "Intermediate-1",
     "title": "Intermediate 1",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html#intermediate-1",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html#intermediate-1"
-  },"12": {
+  },"14": {
     "doc": "Intermediate-1",
     "title": "Intermediate-1",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-1.html",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-1.html"
-  },"13": {
+  },"15": {
     "doc": "Intermediate-2",
     "title": "Intermediate 2",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-2.html#intermediate-2",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-2.html#intermediate-2"
-  },"14": {
+  },"16": {
     "doc": "Intermediate-2",
     "title": "Intermediate-2",
     "content": " ",
     "url": "/d3js-tutorial/docs/tutorial-intermediate/intermediate-2.html",
     
     "relUrl": "/docs/tutorial-intermediate/intermediate-2.html"
+  },"17": {
+    "doc": "Title",
+    "title": "Template",
+    "content": " ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/template.html#template",
+    
+    "relUrl": "/docs/tutorial-basic/template.html#template"
+  },"18": {
+    "doc": "Title",
+    "title": "Topic 1",
+    "content": "Main reference: . | https://d3js.org/d3-selection | . var color = 'red'; function select(){ console.log('select clicked'); if (color == 'red') color = 'blue'; else color = 'red'; d3.select('#ex1').style('color',d3.color(color)) } . Click me . ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/template.html#topic-1",
+    
+    "relUrl": "/docs/tutorial-basic/template.html#topic-1"
+  },"19": {
+    "doc": "Title",
+    "title": "Title",
+    "content": " ",
+    "url": "/d3js-tutorial/docs/tutorial-basic/template.html",
+    
+    "relUrl": "/docs/tutorial-basic/template.html"
   }
 }
